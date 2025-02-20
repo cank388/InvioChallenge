@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,10 +13,46 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVO-eg-5Hg">
+                                <rect key="frame" x="50" y="326" width="293" height="200"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ZwO-8z-01L">
+                                        <rect key="frame" x="20" y="0.0" width="253" height="140"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Üniversiteler" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="god-yk-1kR">
+                                        <rect key="frame" x="20" y="160" width="253" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="mGt-ge-6Sb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="god-yk-1kR" firstAttribute="leading" secondItem="gVO-eg-5Hg" secondAttribute="leading" constant="20" id="BD7-8Z-ENB"/>
+                                    <constraint firstAttribute="trailing" secondItem="god-yk-1kR" secondAttribute="trailing" constant="20" id="HsE-bH-spi"/>
+                                    <constraint firstItem="ZwO-8z-01L" firstAttribute="top" secondItem="gVO-eg-5Hg" secondAttribute="top" id="Q3c-mr-r0S"/>
+                                    <constraint firstAttribute="bottom" secondItem="god-yk-1kR" secondAttribute="bottom" constant="20" id="Q9z-iZ-T2m"/>
+                                    <constraint firstAttribute="height" constant="200" id="XVa-ff-aXJ"/>
+                                    <constraint firstItem="god-yk-1kR" firstAttribute="top" secondItem="ZwO-8z-01L" secondAttribute="bottom" constant="20" id="knc-xj-96I"/>
+                                    <constraint firstItem="ZwO-8z-01L" firstAttribute="leading" secondItem="gVO-eg-5Hg" secondAttribute="leading" constant="20" id="sLI-JI-ZTs"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZwO-8z-01L" secondAttribute="trailing" constant="20" id="ywN-7V-cxd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gVO-eg-5Hg" secondAttribute="trailing" constant="50" id="2oY-Bc-0L1"/>
+                            <constraint firstItem="gVO-eg-5Hg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="B5j-JN-lXy"/>
+                            <constraint firstItem="gVO-eg-5Hg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Szz-g1-q95"/>
+                            <constraint firstItem="gVO-eg-5Hg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="l4W-xh-6eo"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,4 +60,10 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="main_icon" width="256" height="256"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
