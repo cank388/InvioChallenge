@@ -49,6 +49,11 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         tableView.register(LoadingCell.self, forCellReuseIdentifier: LoadingCell.identifier)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateCellViewModels()
+    }
+    
     private func setupUI() {
         title = "Üniversiteler"
         navigationItem.searchController = searchController
@@ -73,7 +78,8 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc private func favoritesButtonTapped() {
-        // TODO: Favoriler sayfasına yönlendirme
+        let favoritesVC = FavoritesScreenViewController()
+        navigationController?.pushViewController(favoritesVC, animated: true)
     }
 }
 

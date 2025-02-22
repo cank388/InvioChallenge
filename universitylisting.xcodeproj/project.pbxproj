@@ -36,6 +36,9 @@
 		8B960C762D69FF6200F6B8A8 /* UniversityWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C752D69FF6200F6B8A8 /* UniversityWebViewModel.swift */; };
 		8B960C792D6A034500F6B8A8 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C782D6A034500F6B8A8 /* LoadingCell.swift */; };
 		8B960C7B2D6A034D00F6B8A8 /* LoadingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C7A2D6A034D00F6B8A8 /* LoadingCellViewModel.swift */; };
+		8B960C7E2D6A03D900F6B8A8 /* FavoritesScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C7D2D6A03D900F6B8A8 /* FavoritesScreenViewController.swift */; };
+		8B960C802D6A03E300F6B8A8 /* FavoritesScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C7F2D6A03E300F6B8A8 /* FavoritesScreenViewModel.swift */; };
+		8B960C832D6A05BC00F6B8A8 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C822D6A05BC00F6B8A8 /* FavoritesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		8B960C752D69FF6200F6B8A8 /* UniversityWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityWebViewModel.swift; sourceTree = "<group>"; };
 		8B960C782D6A034500F6B8A8 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		8B960C7A2D6A034D00F6B8A8 /* LoadingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCellViewModel.swift; sourceTree = "<group>"; };
+		8B960C7D2D6A03D900F6B8A8 /* FavoritesScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreenViewController.swift; sourceTree = "<group>"; };
+		8B960C7F2D6A03E300F6B8A8 /* FavoritesScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreenViewModel.swift; sourceTree = "<group>"; };
+		8B960C822D6A05BC00F6B8A8 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 		8B28A5CA2D67401A00FCD9B6 /* universitylisting */ = {
 			isa = PBXGroup;
 			children = (
+				8B960C812D6A05AF00F6B8A8 /* Managers */,
 				8B28A5FA2D67673000FCD9B6 /* Navigation */,
 				8B28A5EA2D67562200FCD9B6 /* Networking */,
 				8B28A5DF2D674B5800FCD9B6 /* Scenes */,
@@ -117,6 +124,7 @@
 		8B28A5DF2D674B5800FCD9B6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8B960C7C2D6A03C400F6B8A8 /* FavoritesScreen */,
 				8B960C722D69FF3700F6B8A8 /* UniversityWebScreen */,
 				8B28A5F92D67629000FCD9B6 /* HomeScreen */,
 				8B28A5E02D674B6100FCD9B6 /* SplashScreen */,
@@ -255,6 +263,23 @@
 			path = LoadingCell;
 			sourceTree = "<group>";
 		};
+		8B960C7C2D6A03C400F6B8A8 /* FavoritesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8B960C7D2D6A03D900F6B8A8 /* FavoritesScreenViewController.swift */,
+				8B960C7F2D6A03E300F6B8A8 /* FavoritesScreenViewModel.swift */,
+			);
+			path = FavoritesScreen;
+			sourceTree = "<group>";
+		};
+		8B960C812D6A05AF00F6B8A8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				8B960C822D6A05BC00F6B8A8 /* FavoritesManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,9 +365,12 @@
 				8B28A5EF2D67565C00FCD9B6 /* APIEndpoint.swift in Sources */,
 				8B28A6082D67683D00FCD9B6 /* HomeCoordinator.swift in Sources */,
 				8B28A5CC2D67401A00FCD9B6 /* AppDelegate.swift in Sources */,
+				8B960C802D6A03E300F6B8A8 /* FavoritesScreenViewModel.swift in Sources */,
 				8B28A5ED2D67564400FCD9B6 /* NetworkManager.swift in Sources */,
 				8B28A6022D6767B300FCD9B6 /* Router.swift in Sources */,
+				8B960C7E2D6A03D900F6B8A8 /* FavoritesScreenViewController.swift in Sources */,
 				8B960C7B2D6A034D00F6B8A8 /* LoadingCellViewModel.swift in Sources */,
+				8B960C832D6A05BC00F6B8A8 /* FavoritesManager.swift in Sources */,
 				8B960C762D69FF6200F6B8A8 /* UniversityWebViewModel.swift in Sources */,
 				8B28A5F32D6757C600FCD9B6 /* UniversityService.swift in Sources */,
 				8B28A5F62D67581D00FCD9B6 /* University.swift in Sources */,

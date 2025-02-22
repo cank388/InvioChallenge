@@ -22,6 +22,7 @@ protocol HomeViewModelProtocol {
     var isLoadingMore: Bool { get }
     func toggleUniversityExpansion(for university: University)
     func updateCellViewModels()
+    func listenFavoritesChanges()
 }
 
 protocol HomeViewModelDelegate: AnyObject {
@@ -37,7 +38,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     private(set) var universities: [UniversityData] = []
     private var isSearchActive = false
     
-    private var favorites: Set<String> = [] // University isimleri için
+    private var favorites: Set<String> = []
     private var expandedCities: Set<String> = []
     private var expandedUniversities: Set<String> = []
     
@@ -47,12 +48,23 @@ final class HomeViewModel: HomeViewModelProtocol {
     private var hasMorePages = true
     
     private var currentSearchText: String?
-    init(universityService: UniversityService = UniversityService()) {
+    
+    private var favoritesManager: FavoritesManaging
+    
+    init(universityService: UniversityService = UniversityService(),
+         favoritesManager: FavoritesManaging = FavoritesManager.shared) {
         self.universityService = universityService
+        self.favoritesManager = favoritesManager
+        listenFavoritesChanges()
+    }
+    
+    func listenFavoritesChanges() {
+        self.favoritesManager.onFavoritesChanged = { [weak self] _ in
+            self?.updateCellViewModels()
+        }
     }
     
     var cities: [String] {
-        // Şehirlerin listesini province'dan alıyoruz
         return universities.compactMap { $0.province }.sorted()
     }
     
@@ -80,11 +92,11 @@ final class HomeViewModel: HomeViewModelProtocol {
                     searchText: nil
             ))
             
-            // İl genişletilmişse üniversiteleri ekle
+            // Expanded cities
             if isProvinceExpanded {
                 for university in universityData.universities ?? [] {
                     let isUniversityExpanded = expandedUniversities.contains(university.name ?? "")
-                    let isFavorite = favorites.contains(university.name ?? "")
+                    let isFavorite = favoritesManager.isFavorite(university)
                     
                     newCellViewModels.append(CityTableViewCellModel(
                         type: .university(
@@ -145,19 +157,15 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     func toggleFavorite(for university: University) {
-        if favorites.contains(university.name ?? "") {
-            favorites.remove(university.name ?? "")
-        } else {
-            favorites.insert(university.name ?? "")
-        }
+        favoritesManager.toggleFavorite(university)
+        updateCellViewModels()
     }
     
     func isUniversityFavorited(_ university: University) -> Bool {
-        return favorites.contains(university.name ?? "")
+        return favoritesManager.isFavorite(university)
     }
     
     func universities(for city: String) -> [University] {
-        // Belirli bir şehirdeki üniversiteleri filtreliyoruz
         return universities
             .first(where: { $0.province == city })?
             .universities ?? []

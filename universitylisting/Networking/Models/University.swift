@@ -26,3 +26,9 @@ struct University: Codable {
     let website: String?
     let email, adress, rector: String?
 }
+
+extension University: Equatable {
+    static func == (lhs: University, rhs: University) -> Bool {
+        return lhs.website == rhs.website
+    }
+}
