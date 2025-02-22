@@ -96,11 +96,11 @@ extension UniversityWebViewController: UniversityWebViewModelDelegate {
     
     func showError(_ message: String) {
         let alert = UIAlertController(
-            title: "Hata",
+            title: "error".localized,
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        alert.addAction(UIAlertAction(title: "done".localized, style: .default))
         present(alert, animated: true)
     }
     

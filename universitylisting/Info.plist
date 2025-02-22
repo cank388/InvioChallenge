@@ -18,6 +18,8 @@
 				</dict>
 			</array>
 		</dict>
+        <key>UIUserInterfaceStyle</key>
+        <string>Light</string>
 	</dict>
 </dict>
 </plist>

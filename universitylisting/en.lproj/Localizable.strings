@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  universitylisting
+
+  Created by Can Kalender on 22.02.2025.
+  
+*/
+//Splash Screen
+"error" = "Error";
+"done" = "Done";
+
+// Home Screen
+"search_university" = "Search university...";
+"universities" = "Universities";
+// Favorites Screen
+"favorites" = "Favorites";
+"favorites_empty_screen" = "You haven't added a university yet!";

@@ -56,6 +56,7 @@ class NetworkManager {
                 switch response.result {
                 case .success(let data):
                     do {
+                        //Print sadece yeni sayfanın yüklendiğini kanıtlamak için koyuldu, productiona print yollamıyorum.
                         //Print JSON Response for debug
                         let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                         let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)

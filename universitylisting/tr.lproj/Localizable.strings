@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  universitylisting
+
+  Created by Can Kalender on 22.02.2025.
+  
+*/
+//Splash Screen
+"error" = "Hata";
+"done" = "Tamam";
+
+// Home Screen
+"search_university" = "Üniversite ara...";
+"universities" = "Üniversiteler";
+// Favorites Screen
+"favorites" = "Favorilerim";
+"favorites_empty_screen" = "Henüz bir üniversite eklemedin!";

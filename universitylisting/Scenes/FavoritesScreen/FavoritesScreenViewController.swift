@@ -23,7 +23,7 @@ final class FavoritesScreenViewController: UIViewController {
     
     private lazy var emptyStateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Henüz bir üniversite eklemedin!"
+        label.text = "favorites_empty_screen".localized
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16)
         label.textColor = .gray
@@ -54,7 +54,7 @@ final class FavoritesScreenViewController: UIViewController {
     }
     
     private func setupUI() {
-        title = "Favorilerim"
+        title = "favorites".localized
         view.backgroundColor = .white
         
         view.addSubview(tableView)

@@ -30,13 +30,13 @@ final class SplashViewController: UIViewController {
     
     private func showError(_ error: Error) {
         let alert = UIAlertController(
-            title: "Error",
+            title: "error".localized,
             message: error.localizedDescription,
             preferredStyle: .alert
         )
         
         alert.addAction(UIAlertAction(
-            title: "Done",
+            title: "done".localized,
             style: .default,
             handler: nil
         ))

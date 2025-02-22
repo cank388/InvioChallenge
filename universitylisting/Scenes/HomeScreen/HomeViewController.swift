@@ -11,10 +11,11 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var viewModel: HomeViewModelProtocol
     weak var coordinator: HomeCoordinator?
+    private let cellIdentifier = "CityTableViewCell"
     
     private lazy var searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: nil)
-        controller.searchBar.placeholder = "Üniversite ara..."
+        controller.searchBar.placeholder = "search_university".localized
         controller.obscuresBackgroundDuringPresentation = false
         controller.searchBar.delegate = self
         controller.searchBar.showsCancelButton = true
@@ -45,7 +46,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         setupUI()
         self.viewModel.delegate = self
-        tableView.register(UINib(nibName: "CityTableViewCell", bundle: nil), forCellReuseIdentifier: "CityTableViewCell")
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.register(LoadingCell.self, forCellReuseIdentifier: LoadingCell.identifier)
     }
     
@@ -55,7 +56,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     }
     
     private func setupUI() {
-        title = "Üniversiteler"
+        title = "universities".localized
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         view.addSubview(tableView)
@@ -98,7 +99,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch cellViewModel {
         case let model as CityTableViewCellModel:
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: "CityTableViewCell",
+                withIdentifier: cellIdentifier,
                 for: indexPath
             ) as! CityTableViewCell
             cell.delegate = self
