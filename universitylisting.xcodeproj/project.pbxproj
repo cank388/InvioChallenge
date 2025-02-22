@@ -34,6 +34,8 @@
 		8B960C6E2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C6D2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift */; };
 		8B960C742D69FF5800F6B8A8 /* UniversityWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C732D69FF5800F6B8A8 /* UniversityWebViewController.swift */; };
 		8B960C762D69FF6200F6B8A8 /* UniversityWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C752D69FF6200F6B8A8 /* UniversityWebViewModel.swift */; };
+		8B960C792D6A034500F6B8A8 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C782D6A034500F6B8A8 /* LoadingCell.swift */; };
+		8B960C7B2D6A034D00F6B8A8 /* LoadingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C7A2D6A034D00F6B8A8 /* LoadingCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		8B960C6D2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCellModel.swift; sourceTree = "<group>"; };
 		8B960C732D69FF5800F6B8A8 /* UniversityWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityWebViewController.swift; sourceTree = "<group>"; };
 		8B960C752D69FF6200F6B8A8 /* UniversityWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityWebViewModel.swift; sourceTree = "<group>"; };
+		8B960C782D6A034500F6B8A8 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		8B960C7A2D6A034D00F6B8A8 /* LoadingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,7 @@
 		8B28A60F2D67B8E800FCD9B6 /* HomeCells */ = {
 			isa = PBXGroup;
 			children = (
+				8B960C772D6A033000F6B8A8 /* LoadingCell */,
 				8B28A6102D67B8F500FCD9B6 /* ProvinceCell */,
 			);
 			path = HomeCells;
@@ -239,6 +244,15 @@
 				8B960C752D69FF6200F6B8A8 /* UniversityWebViewModel.swift */,
 			);
 			path = UniversityWebScreen;
+			sourceTree = "<group>";
+		};
+		8B960C772D6A033000F6B8A8 /* LoadingCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B960C782D6A034500F6B8A8 /* LoadingCell.swift */,
+				8B960C7A2D6A034D00F6B8A8 /* LoadingCellViewModel.swift */,
+			);
+			path = LoadingCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,12 +342,14 @@
 				8B28A5CC2D67401A00FCD9B6 /* AppDelegate.swift in Sources */,
 				8B28A5ED2D67564400FCD9B6 /* NetworkManager.swift in Sources */,
 				8B28A6022D6767B300FCD9B6 /* Router.swift in Sources */,
+				8B960C7B2D6A034D00F6B8A8 /* LoadingCellViewModel.swift in Sources */,
 				8B960C762D69FF6200F6B8A8 /* UniversityWebViewModel.swift in Sources */,
 				8B28A5F32D6757C600FCD9B6 /* UniversityService.swift in Sources */,
 				8B28A5F62D67581D00FCD9B6 /* University.swift in Sources */,
 				8B28A6002D6767A000FCD9B6 /* Coordinator.swift in Sources */,
 				8B28A5CE2D67401A00FCD9B6 /* SceneDelegate.swift in Sources */,
 				8B28A5F82D6758A900FCD9B6 /* UniversityEndpoint.swift in Sources */,
+				8B960C792D6A034500F6B8A8 /* LoadingCell.swift in Sources */,
 				8B960C742D69FF5800F6B8A8 /* UniversityWebViewController.swift in Sources */,
 				8B960C6E2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift in Sources */,
 				8B28A60A2D67983100FCD9B6 /* HomeViewController.swift in Sources */,
