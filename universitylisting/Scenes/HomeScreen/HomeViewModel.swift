@@ -46,6 +46,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     private var isLoading = false
     private var hasMorePages = true
     
+    private var currentSearchText: String?
     init(universityService: UniversityService = UniversityService()) {
         self.universityService = universityService
     }
@@ -72,9 +73,11 @@ final class HomeViewModel: HomeViewModelProtocol {
         for universityData in universities {
             let isProvinceExpanded = expandedCities.contains(universityData.province ?? "")
             
-            // İl başlığı ekle
             newCellViewModels.append(CityTableViewCellModel(
-                type: .province(universityData.province ?? "", isExpanded: isProvinceExpanded, hasUniversities: (universityData.universities?.isEmpty ?? false))
+                    type: .province(universityData.province ?? "",
+                    isExpanded: isProvinceExpanded,
+                    hasUniversities: (universityData.universities?.isEmpty ?? false)),
+                    searchText: nil
             ))
             
             // İl genişletilmişse üniversiteleri ekle
@@ -88,7 +91,8 @@ final class HomeViewModel: HomeViewModelProtocol {
                             university,
                             isFavorite: isFavorite,
                             isExpanded: isUniversityExpanded
-                        )
+                        ),
+                        searchText: currentSearchText
                     ))
                 }
             }
@@ -104,12 +108,14 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     func searchUniversities(with text: String) {
         let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        currentSearchText = searchText
         
         guard !searchText.isEmpty else {
             isSearchActive = false
             universities = allUniversities
             expandedCities.removeAll()
             expandedUniversities.removeAll()
+            currentSearchText = nil
             updateCellViewModels()
             delegate?.searchResultsDidUpdate()
             return
@@ -124,15 +130,15 @@ final class HomeViewModel: HomeViewModelProtocol {
                 return nil
             }
             
+            // Open searched cities
+            expandedCities.insert(universityData.province ?? "")
+            
             return UniversityData(
                 id: universityData.id,
                 province: universityData.province,
                 universities: universities
             )
         }
-        
-        // Arama sonuçlarında illerin otomatik açılmasını kaldırdık
-        // expandedCities ve expandedUniversities setlerini değiştirmiyoruz
         
         updateCellViewModels()
         delegate?.searchResultsDidUpdate()

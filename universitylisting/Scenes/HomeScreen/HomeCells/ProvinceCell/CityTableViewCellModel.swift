@@ -22,8 +22,10 @@ enum CityTableViewItemType {
 
 struct CityTableViewCellModel {
     let type: CityTableViewItemType
+    let searchText: String?
     
-    init(type: CityTableViewItemType) {
+    init(type: CityTableViewItemType, searchText: String? = nil) {
         self.type = type
+        self.searchText = searchText
     }
 }

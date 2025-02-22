@@ -162,7 +162,13 @@ class CityTableViewCell: UITableViewCell {
         expandImageView.isHidden = false
         expandImageView.image = UIImage(systemName: isExpanded ? "minus" : "plus")
         
-        titleLabel.text = university.name
+        if let searchText = model?.searchText, !searchText.isEmpty,
+           let universityName = university.name {
+            titleLabel.attributedText = highlightText(in: universityName, searchText: searchText)
+        } else {
+            titleLabel.text = university.name
+        }
+        
         favoriteButton.isHidden = false
         favoriteButton.setImage(UIImage(systemName: isFavorite ? "heart.fill" : "heart"), for: .normal)
         
@@ -172,6 +178,26 @@ class CityTableViewCell: UITableViewCell {
         } else {
             detailsStackView.isHidden = true
         }
+    }
+    
+    private func highlightText(in text: String, searchText: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: text)
+        let textLowercased = text.lowercased()
+        let searchTextLowercased = searchText.lowercased()
+        
+        var searchRange = NSRange(location: 0, length: textLowercased.count)
+        while searchRange.location != NSNotFound {
+            let range = (textLowercased as NSString).range(of: searchTextLowercased, options: [], range: searchRange)
+            if range.location != NSNotFound {
+                attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 16), range: range)
+                searchRange.location = range.location + range.length
+                searchRange.length = textLowercased.count - searchRange.location
+            } else {
+                break
+            }
+        }
+        
+        return attributedString
     }
     
     private func setupUniversityDetails(_ university: University) {

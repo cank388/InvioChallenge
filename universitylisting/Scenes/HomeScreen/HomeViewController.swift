@@ -17,6 +17,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         controller.searchBar.placeholder = "Üniversite ara..."
         controller.obscuresBackgroundDuringPresentation = false
         controller.searchBar.delegate = self
+        controller.searchBar.showsCancelButton = true
         return controller
     }()
     
@@ -126,23 +127,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - UISearchBarDelegate
 extension HomeViewController {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.searchUniversities(with: "")
-        tableView.reloadData()
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Arama metnini temizle butonunu göster/gizle
+        searchBar.setShowsCancelButton(!searchText.isEmpty, animated: true)
+        
         // Add delay before search
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(performSearch), object: nil)
         perform(#selector(performSearch), with: nil, afterDelay: 0.5)
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.searchUniversities(with: "")
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+    
     @objc private func performSearch() {
         guard let searchText = searchController.searchBar.text else { return }
         viewModel.searchUniversities(with: searchText)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 }
 
