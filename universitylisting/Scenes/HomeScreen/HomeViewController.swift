@@ -18,6 +18,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         controller.obscuresBackgroundDuringPresentation = false
         controller.searchBar.delegate = self
         controller.searchBar.showsCancelButton = true
+        controller.hidesNavigationBarDuringPresentation = false
         return controller
     }()
     
@@ -51,6 +52,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     private func setupUI() {
         title = "Üniversiteler"
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -122,6 +124,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == viewModel.cellViewModels.count - 1 {
             viewModel.loadNextPage()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
     }
 }
 
