@@ -130,8 +130,8 @@ class CityTableViewCell: UITableViewCell {
         switch model.type {
         case .province(let name, let isExpanded, let hasUniversities):
             setupAsProvince(name: name, isExpanded: isExpanded, hasUniversities: hasUniversities)
-        case .university(let university, let isFavorite, let isExpanded):
-            setupAsUniversity(university: university, isFavorite: isFavorite, isExpanded: isExpanded)
+        case .university(let university, let isFavorite, let isExpanded, let insertIndentation):
+            setupAsUniversity(university: university, isFavorite: isFavorite, isExpanded: isExpanded, insertIndentation: insertIndentation)
         }
     }
     
@@ -152,11 +152,11 @@ class CityTableViewCell: UITableViewCell {
         detailsStackView.isHidden = true
     }
     
-    private func setupAsUniversity(university: University, isFavorite: Bool, isExpanded: Bool) {
+    private func setupAsUniversity(university: University, isFavorite: Bool, isExpanded: Bool, insertIndentation: Bool = true) {
         let indentationView = UIView()
         indentationView.translatesAutoresizingMaskIntoConstraints = false
         indentationView.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        titleStackView.insertArrangedSubview(indentationView, at: 0)
+        insertIndentation ? titleStackView.insertArrangedSubview(indentationView, at: 0) : nil
         
         expandImageView.tintColor = .black
         expandImageView.isHidden = false
@@ -256,7 +256,7 @@ class CityTableViewCell: UITableViewCell {
     
     @objc private func handleTappableLabel(_ gesture: UITapGestureRecognizer) {
         guard let label = gesture.view as? UILabel,
-              case .university(let university, _, _) = model?.type else { return }
+              case .university(let university, _, _, _) = model?.type else { return }
         
         if label.tag == 1 { // Website
             if let website = university.website {
@@ -275,13 +275,13 @@ class CityTableViewCell: UITableViewCell {
         switch model.type {
         case .province(let name, _, _):
             delegate?.didTapExpand(for: name)
-        case .university(let university, _, _):
+        case .university(let university, _, _, _):
             delegate?.didTapUniversityExpand(for: university)
         }
     }
     
     @objc private func favoriteTapped() {
-        guard case .university(let university, _, _) = model?.type else { return }
+        guard case .university(let university, _, _, _) = model?.type else { return }
         delegate?.didTapFavorite(for: university)
     }
     

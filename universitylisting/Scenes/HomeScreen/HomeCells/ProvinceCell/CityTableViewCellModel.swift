@@ -17,7 +17,7 @@ protocol CityTableViewCellDelegate: AnyObject {
 
 enum CityTableViewItemType {
     case province(String, isExpanded: Bool, hasUniversities: Bool)
-    case university(University, isFavorite: Bool, isExpanded: Bool)
+    case university(University, isFavorite: Bool, isExpanded: Bool, insertIndentation: Bool = true)
 }
 
 struct CityTableViewCellModel {

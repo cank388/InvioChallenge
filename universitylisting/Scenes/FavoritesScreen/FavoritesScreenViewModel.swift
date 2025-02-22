@@ -50,7 +50,8 @@ final class FavoritesScreenViewModel: FavoritesViewModelProtocol {
                 type: .university(
                     university,
                     isFavorite: true,
-                    isExpanded: isExpanded
+                    isExpanded: isExpanded,
+                    insertIndentation: false
                 ),
                 searchText: nil
             )
