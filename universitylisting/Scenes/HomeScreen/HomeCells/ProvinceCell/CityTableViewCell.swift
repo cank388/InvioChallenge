@@ -39,7 +39,7 @@ class CityTableViewCell: UITableViewCell {
     private let expandImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .systemBlue
+        imageView.tintColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -47,6 +47,8 @@ class CityTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     
@@ -54,6 +56,7 @@ class CityTableViewCell: UITableViewCell {
         let button = UIButton()
         button.tintColor = .red
         button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
         return button
     }()
     
@@ -140,12 +143,9 @@ class CityTableViewCell: UITableViewCell {
             indentationView.removeFromSuperview()
         }
 
-        if hasUniversities {
-            expandImageView.isHidden = true
-        } else {
-            expandImageView.isHidden = false
-            expandImageView.image = UIImage(systemName: isExpanded ? "minus" : "plus")
-        }
+        expandImageView.tintColor = .systemBlue
+        expandImageView.isHidden = false
+        expandImageView.image = UIImage(systemName: isExpanded ? "minus" : "plus")
         
         titleLabel.text = name
         favoriteButton.isHidden = true
@@ -158,8 +158,10 @@ class CityTableViewCell: UITableViewCell {
         indentationView.widthAnchor.constraint(equalToConstant: 24).isActive = true
         titleStackView.insertArrangedSubview(indentationView, at: 0)
         
-        expandImageView.isHidden = !isExpanded
+        expandImageView.tintColor = .black
+        expandImageView.isHidden = false
         expandImageView.image = UIImage(systemName: isExpanded ? "minus" : "plus")
+        
         titleLabel.text = university.name
         favoriteButton.isHidden = false
         favoriteButton.setImage(UIImage(systemName: isFavorite ? "heart.fill" : "heart"), for: .normal)
@@ -198,10 +200,8 @@ class CityTableViewCell: UITableViewCell {
         guard let model = model else { return }
         
         switch model.type {
-        case .province(let name, _, let hasUniversities):
-            if !hasUniversities {
-                delegate?.didTapExpand(for: name)
-            }
+        case .province(let name, _, _):
+            delegate?.didTapExpand(for: name)
         case .university(let university, _, _):
             delegate?.didTapUniversityExpand(for: university)
         }
