@@ -11,7 +11,7 @@ protocol CityTableViewCellDelegate: AnyObject {
     func didTapExpand(for province: String)
     func didTapUniversityExpand(for university: University)
     func didTapFavorite(for university: University)
-    func didTapWebsite(_ urlString: String)
+    func didTapWebsite(_ urlString: String, universityName: String)
     func didTapPhone(_ phoneNumber: String)
 }
 

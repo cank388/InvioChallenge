@@ -200,10 +200,9 @@ extension HomeViewController: CityTableViewCellDelegate {
         tableView.reloadData()
     }
     
-    func didTapWebsite(_ urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true)
+    func didTapWebsite(_ urlString: String, universityName: String) {
+        let webViewController = UniversityWebViewController(urlString: urlString, universityName: universityName)
+        navigationController?.pushViewController(webViewController, animated: true)
     }
     
     func didTapPhone(_ phoneNumber: String) {

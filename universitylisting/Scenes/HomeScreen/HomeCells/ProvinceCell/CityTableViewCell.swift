@@ -203,21 +203,68 @@ class CityTableViewCell: UITableViewCell {
     private func setupUniversityDetails(_ university: University) {
         detailsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        let details: [(String, String?)] = [
-            ("phone", university.phone),
+        // Tappable label for phone
+        if let phone = university.phone, !phone.isEmpty {
+            let phoneLabel = createTappableLabel(text: "phone: \(phone)", type: .phone)
+            detailsStackView.addArrangedSubview(phoneLabel)
+        }
+        
+        // Tappable label for website
+        if let website = university.website, !website.isEmpty {
+            let websiteLabel = createTappableLabel(text: "website: \(website)", type: .website)
+            detailsStackView.addArrangedSubview(websiteLabel)
+        }
+        
+        let otherDetails: [(String, String?)] = [
             ("fax", university.fax),
-            ("website", university.website),
             ("address", university.adress),
             ("rector", university.rector)
         ]
         
-        for (title, value) in details {
+        for (title, value) in otherDetails {
             if let value = value, !value.isEmpty {
                 let label = UILabel()
                 label.text = "\(title): \(value)"
                 label.font = .systemFont(ofSize: 14)
                 label.numberOfLines = 0
                 detailsStackView.addArrangedSubview(label)
+            }
+        }
+    }
+    
+    private enum TappableLabelType {
+        case website
+        case phone
+    }
+    
+    private func createTappableLabel(text: String, type: TappableLabelType) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = .systemFont(ofSize: 14)
+        label.numberOfLines = 0
+        label.textColor = .systemBlue
+        label.isUserInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTappableLabel(_:)))
+        label.addGestureRecognizer(tapGesture)
+        
+        // Webview is 1, phone is 2
+        label.tag = type == .website ? 1 : 2
+        
+        return label
+    }
+    
+    @objc private func handleTappableLabel(_ gesture: UITapGestureRecognizer) {
+        guard let label = gesture.view as? UILabel,
+              case .university(let university, _, _) = model?.type else { return }
+        
+        if label.tag == 1 { // Website
+            if let website = university.website {
+                delegate?.didTapWebsite(website, universityName: university.name ?? "")
+            }
+        } else if label.tag == 2 { // Phone
+            if let phone = university.phone {
+                delegate?.didTapPhone(phone)
             }
         }
     }
