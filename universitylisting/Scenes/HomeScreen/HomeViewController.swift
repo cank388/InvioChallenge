@@ -32,6 +32,16 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         return table
     }()
     
+    private lazy var collapseButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "cancel"), for: .normal)
+        button.tintColor = .systemBlue
+        button.addTarget(self, action: #selector(collapseButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        return button
+    }()
+    
     init(_ viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -60,13 +70,18 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         view.addSubview(tableView)
+        view.addSubview(collapseButton)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collapseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            collapseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            collapseButton.widthAnchor.constraint(equalToConstant: 40),
+            collapseButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         let favoritesButton = UIBarButtonItem(
@@ -80,6 +95,10 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     @objc private func favoritesButtonTapped() {
         coordinator?.goToFavorites()
+    }
+    
+    @objc private func collapseButtonTapped() {
+        viewModel.collapseAll()
     }
 }
 
@@ -149,6 +168,11 @@ extension HomeViewController {
         // Add delay before search
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(performSearch), object: nil)
         perform(#selector(performSearch), with: nil, afterDelay: 0.5)
+        
+        collapseButton.isHidden = true
+        if searchText.isEmpty {
+            searchBar.resignFirstResponder()
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -156,11 +180,13 @@ extension HomeViewController {
         viewModel.searchUniversities(with: "")
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
+        collapseButton.isHidden = !viewModel.hasExpandedItems
     }
     
     @objc private func performSearch() {
         guard let searchText = searchController.searchBar.text else { return }
         viewModel.searchUniversities(with: searchText)
+        searchController.searchBar.resignFirstResponder()
     }
 }
 
@@ -169,6 +195,9 @@ extension HomeViewController: HomeViewModelDelegate {
     func universitiesDidUpdate() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            // Collapse button is hidden if there are no expanded items or search is active
+            self.collapseButton.isHidden = !self.viewModel.hasExpandedItems ||
+                (self.searchController.searchBar.text?.isEmpty == false)
         }
     }
     

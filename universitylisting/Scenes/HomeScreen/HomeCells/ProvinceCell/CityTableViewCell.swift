@@ -144,7 +144,7 @@ class CityTableViewCell: UITableViewCell {
         }
 
         expandImageView.tintColor = .systemBlue
-        expandImageView.isHidden = false
+        expandImageView.isHidden = hasUniversities
         expandImageView.image = UIImage(systemName: isExpanded ? "minus" : "plus")
         
         titleLabel.text = name

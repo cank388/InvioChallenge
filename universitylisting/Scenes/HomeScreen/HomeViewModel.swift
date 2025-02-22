@@ -23,6 +23,8 @@ protocol HomeViewModelProtocol {
     func toggleUniversityExpansion(for university: University)
     func updateCellViewModels()
     func listenFavoritesChanges()
+    var hasExpandedItems: Bool { get }
+    func collapseAll()
 }
 
 protocol HomeViewModelDelegate: AnyObject {
@@ -219,5 +221,22 @@ final class HomeViewModel: HomeViewModelProtocol {
                 print("Error loading next page: \(error)")
             }
         }
+    }
+    
+    var hasExpandedItems: Bool {
+        // Check if there is any university on expanded cities
+        let hasExpandedCityWithUniversities = expandedCities.contains { city in
+            universities.first { data in
+                data.province == city && !(data.universities?.isEmpty ?? true)
+            } != nil
+        }
+        
+        return hasExpandedCityWithUniversities || !expandedUniversities.isEmpty
+    }
+    
+    func collapseAll() {
+        expandedCities.removeAll()
+        expandedUniversities.removeAll()
+        updateCellViewModels()
     }
 }
