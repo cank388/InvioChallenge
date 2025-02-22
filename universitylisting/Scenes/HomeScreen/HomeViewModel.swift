@@ -103,7 +103,6 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     func searchUniversities(with text: String) {
-        
         let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         
         guard !searchText.isEmpty else {
@@ -111,7 +110,8 @@ final class HomeViewModel: HomeViewModelProtocol {
             universities = allUniversities
             expandedCities.removeAll()
             expandedUniversities.removeAll()
-            delegate?.universitiesDidUpdate()
+            updateCellViewModels()
+            delegate?.searchResultsDidUpdate()
             return
         }
         
@@ -119,8 +119,7 @@ final class HomeViewModel: HomeViewModelProtocol {
         universities = allUniversities.compactMap { universityData in
             guard let universities = universityData.universities?.filter({ university in
                 let name = university.name?.lowercased() ?? ""
-                let contains = name.contains(searchText)
-                return contains
+                return name.contains(searchText)
             }), !universities.isEmpty else {
                 return nil
             }
@@ -132,10 +131,11 @@ final class HomeViewModel: HomeViewModelProtocol {
             )
         }
         
-        // Arama sonuçlarının olduğu tüm bölümleri otomatik olarak aç
-        expandedCities = Set(universities.compactMap { $0.province })
-        expandedUniversities = Set(universities.compactMap { $0.universities?.map { $0.name ?? "" } ?? [] }.joined())
-        delegate?.universitiesDidUpdate()
+        // Arama sonuçlarında illerin otomatik açılmasını kaldırdık
+        // expandedCities ve expandedUniversities setlerini değiştirmiyoruz
+        
+        updateCellViewModels()
+        delegate?.searchResultsDidUpdate()
     }
     
     func toggleFavorite(for university: University) {

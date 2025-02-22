@@ -16,7 +16,6 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         let controller = UISearchController(searchResultsController: nil)
         controller.searchBar.placeholder = "Üniversite ara..."
         controller.obscuresBackgroundDuringPresentation = false
-        controller.searchResultsUpdater = self
         controller.searchBar.delegate = self
         return controller
     }()
@@ -129,10 +128,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModel.searchUniversities(with: "")
+        tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // Kullanıcı yazarken sürekli arama yapmayı engellemek için
+        // Add delay before search
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(performSearch), object: nil)
         perform(#selector(performSearch), with: nil, afterDelay: 0.5)
     }
@@ -140,17 +140,9 @@ extension HomeViewController {
     @objc private func performSearch() {
         guard let searchText = searchController.searchBar.text else { return }
         viewModel.searchUniversities(with: searchText)
-    }
-}
-
-// MARK: - UISearchResultsUpdating
-extension HomeViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        // UISearchResultsUpdating protokolünü implement etmemiz gerekiyor
-        // ama asıl arama işlemini searchBarDelegate üzerinden yapacağız
     }
 }
 
