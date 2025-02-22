@@ -28,7 +28,6 @@ protocol HomeViewModelProtocol {
 protocol HomeViewModelDelegate: AnyObject {
     func universitiesDidUpdate()
     func searchResultsDidUpdate()
-    func showLoading(_ show: Bool)
 }
 
 final class HomeViewModel: HomeViewModelProtocol {
@@ -198,13 +197,11 @@ final class HomeViewModel: HomeViewModelProtocol {
         guard !isLoading && hasMorePages && !isSearchActive else { return }
         
         isLoading = true
-        delegate?.showLoading(true)
         
         universityService.posts(with: currentPage + 1) { [weak self] result in
             guard let self = self else { return }
             
             self.isLoading = false
-            self.delegate?.showLoading(false)
             
             switch result {
             case .success(let response):

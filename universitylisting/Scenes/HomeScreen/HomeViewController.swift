@@ -6,11 +6,11 @@
 //
 
 import UIKit
-import SafariServices
 
 final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var viewModel: HomeViewModelProtocol
+    weak var coordinator: HomeCoordinator?
     
     private lazy var searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: nil)
@@ -78,8 +78,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc private func favoritesButtonTapped() {
-        let favoritesVC = FavoritesScreenViewController()
-        navigationController?.pushViewController(favoritesVC, animated: true)
+        coordinator?.goToFavorites()
     }
 }
 
@@ -144,7 +143,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - UISearchBarDelegate
 extension HomeViewController {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // Arama metnini temizle butonunu göster/gizle
         searchBar.setShowsCancelButton(!searchText.isEmpty, animated: true)
         
         // Add delay before search
@@ -175,17 +173,6 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func searchResultsDidUpdate() {
         tableView.reloadData()
-    }
-    
-    func showLoading(_ show: Bool) {
-        if show {
-            let spinner = UIActivityIndicatorView(style: .medium)
-            spinner.startAnimating()
-            spinner.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
-            tableView.tableFooterView = spinner
-        } else {
-            tableView.tableFooterView = nil
-        }
     }
 }
 

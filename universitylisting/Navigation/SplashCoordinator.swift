@@ -14,9 +14,7 @@ protocol SplashCoordinatorDelegate: AnyObject {
 
 class SplashCoordinator: Coordinator {
     
-    
     // MARK: - Properties
-    private var rootViewController: SplashViewController!
     var childCoordinators: [Coordinator] = []
     var router: Router
     var navigationController: UINavigationController
@@ -36,14 +34,10 @@ class SplashCoordinator: Coordinator {
         splashVC.viewModel = SplashViewModel()
         navigationController.pushViewController(splashVC, animated: animated)
     }
-    
-    func finishSplash() {
-        delegate?.splashCoordinatorDidFinish(self)
+        
+    func routeToHomepage(universities: [UniversityData]) {
+        let homeCoordinator = HomeCoordinator(router: router, navigationController: self.router.navigationController)
+        routeToChildCoordinator(homeCoordinator, animated: false, onDismissed: nil)
+        homeCoordinator.start(universities: universities)
     }
-    
-//    // Splash ekranından üniversite listesine geçiş için yeni metod
-//    func routeToUniversityList() {
-//        let universityListViewController = UniversityListViewController()
-//        router.route(to: universityListViewController, animated: true, onDismissed: nil)
-//    }
 }

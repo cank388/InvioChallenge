@@ -36,7 +36,7 @@ final class SplashViewController: UIViewController {
         )
         
         alert.addAction(UIAlertAction(
-            title: "Try Again",
+            title: "Done",
             style: .default,
             handler: nil
         ))
@@ -48,29 +48,7 @@ final class SplashViewController: UIViewController {
 // MARK: - SplashViewModelDelegate
 extension SplashViewController: SplashViewModelDelegate {
     func splashLoadingCompleted(universities: [UniversityData]) {
-        let homeViewModel = HomeViewModel()
-        homeViewModel.setUniversities(universities)
-        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        homeViewController.viewModel = homeViewModel
-        navigationController?.pushViewController(homeViewController, animated: true)
-//        if let navigationController = navigationController {
-//            navigationController.pushViewController(homeViewController, animated: true)
-//        }
-//        let newNavigationController = UINavigationController(rootViewController: homeViewController)
-//        newNavigationController.pushViewController(newNavigationController, animated: true)
-        
-        //let hostingController = UIHostingController(rootView: homeView)
-        
-//        // Eğer zaten bir navigation controller içindeysek
-//        if let navigationController = navigationController {
-//            navigationController.pushViewController(hostingController, animated: true)
-//        } else {
-//            // Eğer navigation controller yoksa yeni bir tane oluştur
-//            let newNavigationController = UINavigationController(rootViewController: hostingController)
-//            newNavigationController.modalPresentationStyle = .fullScreen
-//            present(newNavigationController, animated: true)
-//        }
+        coordinator?.routeToHomepage(universities: universities)
     }
     
     func splashLoadingFailed(with error: Error) {
