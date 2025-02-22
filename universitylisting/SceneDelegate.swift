@@ -18,11 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let viewModel = SplashViewModel()
-        let splashViewController = SplashViewController(viewModel: viewModel)
-        
+        let storyboard = UIStoryboard(name: "Splash", bundle: nil)
+        let splashViewController = storyboard.instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
+        splashViewController.viewModel = SplashViewModel()
+        let rootVC = UINavigationController(rootViewController: splashViewController)
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = splashViewController
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
 

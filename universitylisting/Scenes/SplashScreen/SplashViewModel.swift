@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SplashViewModelDelegate: AnyObject {
-    func splashLoadingCompleted()
+    func splashLoadingCompleted(universities: [UniversityData])
     func splashLoadingFailed(with error: Error)
 }
 
@@ -28,12 +28,11 @@ final class SplashViewModel: SplashViewModelProtocol {
     func fetchUniversities() {
         service.posts(with: 1) { [weak self] result in
             switch result {
-            case .success(let data):
-                // Başarılı durumda delegate'e haber ver
-                self?.delegate?.splashLoadingCompleted()
-                
+            case .success(let response):
+                if let universities = response.data {
+                    self?.delegate?.splashLoadingCompleted(universities: universities)
+                }
             case .failure(let error):
-                // Hata durumunda delegate'e haber ver
                 self?.delegate?.splashLoadingFailed(with: error)
             }
         }

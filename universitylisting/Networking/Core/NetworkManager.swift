@@ -56,6 +56,13 @@ class NetworkManager {
                 switch response.result {
                 case .success(let data):
                     do {
+                        //Print JSON Response for debug
+                        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                        let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            print("JSON Response:\n\(jsonString)")
+                        }
+
                         let decodedObject = try self.jsonDecoder.decode(T.self, from: data)
                         completion(.success(decodedObject))
                     } catch {

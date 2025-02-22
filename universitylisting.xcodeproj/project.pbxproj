@@ -20,6 +20,18 @@
 		8B28A5F32D6757C600FCD9B6 /* UniversityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A5F22D6757C600FCD9B6 /* UniversityService.swift */; };
 		8B28A5F62D67581D00FCD9B6 /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A5F52D67581D00FCD9B6 /* University.swift */; };
 		8B28A5F82D6758A900FCD9B6 /* UniversityEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A5F72D6758A900FCD9B6 /* UniversityEndpoint.swift */; };
+		8B28A5FE2D67678B00FCD9B6 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A5FD2D67678B00FCD9B6 /* NavigationRouter.swift */; };
+		8B28A6002D6767A000FCD9B6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A5FF2D6767A000FCD9B6 /* Coordinator.swift */; };
+		8B28A6022D6767B300FCD9B6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A6012D6767B300FCD9B6 /* Router.swift */; };
+		8B28A6042D6767DA00FCD9B6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A6032D6767DA00FCD9B6 /* MainCoordinator.swift */; };
+		8B28A6062D6767F900FCD9B6 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A6052D6767F900FCD9B6 /* SplashCoordinator.swift */; };
+		8B28A6082D67683D00FCD9B6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A6072D67683D00FCD9B6 /* HomeCoordinator.swift */; };
+		8B28A60A2D67983100FCD9B6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A6092D67983100FCD9B6 /* HomeViewController.swift */; };
+		8B28A60C2D67985500FCD9B6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B28A60B2D67985500FCD9B6 /* HomeViewModel.swift */; };
+		8B28A60E2D67986200FCD9B6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B28A60D2D67986200FCD9B6 /* Home.storyboard */; };
+		8B960C6B2D68D7B500F6B8A8 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C692D68D7B500F6B8A8 /* CityTableViewCell.swift */; };
+		8B960C6C2D68D7B500F6B8A8 /* CityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B960C6A2D68D7B500F6B8A8 /* CityTableViewCell.xib */; };
+		8B960C6E2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B960C6D2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +49,18 @@
 		8B28A5F22D6757C600FCD9B6 /* UniversityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityService.swift; sourceTree = "<group>"; };
 		8B28A5F52D67581D00FCD9B6 /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
 		8B28A5F72D6758A900FCD9B6 /* UniversityEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityEndpoint.swift; sourceTree = "<group>"; };
+		8B28A5FD2D67678B00FCD9B6 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		8B28A5FF2D6767A000FCD9B6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		8B28A6012D6767B300FCD9B6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8B28A6032D6767DA00FCD9B6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		8B28A6052D6767F900FCD9B6 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		8B28A6072D67683D00FCD9B6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		8B28A6092D67983100FCD9B6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8B28A60B2D67985500FCD9B6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8B28A60D2D67986200FCD9B6 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		8B960C692D68D7B500F6B8A8 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
+		8B960C6A2D68D7B500F6B8A8 /* CityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityTableViewCell.xib; sourceTree = "<group>"; };
+		8B960C6D2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +94,7 @@
 		8B28A5CA2D67401A00FCD9B6 /* universitylisting */ = {
 			isa = PBXGroup;
 			children = (
+				8B28A5FA2D67673000FCD9B6 /* Navigation */,
 				8B28A5EA2D67562200FCD9B6 /* Networking */,
 				8B28A5DF2D674B5800FCD9B6 /* Scenes */,
 				8B28A5CB2D67401A00FCD9B6 /* AppDelegate.swift */,
@@ -147,8 +172,59 @@
 		8B28A5F92D67629000FCD9B6 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				8B28A60F2D67B8E800FCD9B6 /* HomeCells */,
+				8B28A6092D67983100FCD9B6 /* HomeViewController.swift */,
+				8B28A60B2D67985500FCD9B6 /* HomeViewModel.swift */,
+				8B28A60D2D67986200FCD9B6 /* Home.storyboard */,
 			);
 			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		8B28A5FA2D67673000FCD9B6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				8B28A5FC2D67677A00FCD9B6 /* Routers */,
+				8B28A5FB2D67677400FCD9B6 /* Core */,
+				8B28A6032D6767DA00FCD9B6 /* MainCoordinator.swift */,
+				8B28A6052D6767F900FCD9B6 /* SplashCoordinator.swift */,
+				8B28A6072D67683D00FCD9B6 /* HomeCoordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		8B28A5FB2D67677400FCD9B6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8B28A5FF2D6767A000FCD9B6 /* Coordinator.swift */,
+				8B28A6012D6767B300FCD9B6 /* Router.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8B28A5FC2D67677A00FCD9B6 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				8B28A5FD2D67678B00FCD9B6 /* NavigationRouter.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		8B28A60F2D67B8E800FCD9B6 /* HomeCells */ = {
+			isa = PBXGroup;
+			children = (
+				8B28A6102D67B8F500FCD9B6 /* ProvinceCell */,
+			);
+			path = HomeCells;
+			sourceTree = "<group>";
+		};
+		8B28A6102D67B8F500FCD9B6 /* ProvinceCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B960C692D68D7B500F6B8A8 /* CityTableViewCell.swift */,
+				8B960C6A2D68D7B500F6B8A8 /* CityTableViewCell.xib */,
+				8B960C6D2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift */,
+			);
+			path = ProvinceCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +291,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B960C6C2D68D7B500F6B8A8 /* CityTableViewCell.xib in Resources */,
 				8B28A5D82D67401B00FCD9B6 /* LaunchScreen.storyboard in Resources */,
 				8B28A5D52D67401B00FCD9B6 /* Assets.xcassets in Resources */,
 				8B28A5E22D674B8400FCD9B6 /* Splash.storyboard in Resources */,
+				8B28A60E2D67986200FCD9B6 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,14 +306,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B28A60C2D67985500FCD9B6 /* HomeViewModel.swift in Sources */,
+				8B960C6B2D68D7B500F6B8A8 /* CityTableViewCell.swift in Sources */,
 				8B28A5E62D674BBF00FCD9B6 /* SplashViewModel.swift in Sources */,
 				8B28A5EF2D67565C00FCD9B6 /* APIEndpoint.swift in Sources */,
+				8B28A6082D67683D00FCD9B6 /* HomeCoordinator.swift in Sources */,
 				8B28A5CC2D67401A00FCD9B6 /* AppDelegate.swift in Sources */,
 				8B28A5ED2D67564400FCD9B6 /* NetworkManager.swift in Sources */,
+				8B28A6022D6767B300FCD9B6 /* Router.swift in Sources */,
 				8B28A5F32D6757C600FCD9B6 /* UniversityService.swift in Sources */,
 				8B28A5F62D67581D00FCD9B6 /* University.swift in Sources */,
+				8B28A6002D6767A000FCD9B6 /* Coordinator.swift in Sources */,
 				8B28A5CE2D67401A00FCD9B6 /* SceneDelegate.swift in Sources */,
 				8B28A5F82D6758A900FCD9B6 /* UniversityEndpoint.swift in Sources */,
+				8B960C6E2D68D7CA00F6B8A8 /* CityTableViewCellModel.swift in Sources */,
+				8B28A60A2D67983100FCD9B6 /* HomeViewController.swift in Sources */,
+				8B28A6042D6767DA00FCD9B6 /* MainCoordinator.swift in Sources */,
+				8B28A6062D6767F900FCD9B6 /* SplashCoordinator.swift in Sources */,
+				8B28A5FE2D67678B00FCD9B6 /* NavigationRouter.swift in Sources */,
 				8B28A5E42D674BB500FCD9B6 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

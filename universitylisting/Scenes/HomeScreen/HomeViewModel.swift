@@ -1,0 +1,212 @@
+//
+//  HomeViewModel.swift
+//  universitylisting
+//
+//  Created by Can Kalender on 20.02.2025.
+//
+
+import Foundation
+
+protocol HomeViewModelProtocol {
+    var cellViewModels: [Any] { get }
+    var universities: [UniversityData] { get }
+    var delegate: HomeViewModelDelegate? { get set }
+    func searchUniversities(with text: String)
+    func toggleFavorite(for university: University)
+    func isUniversityFavorited(_ university: University) -> Bool
+    var cities: [String] { get }
+    func universities(for city: String) -> [University]
+    func isExpanded(_ city: String) -> Bool
+    func toggleExpansion(for city: String)
+    func loadNextPage()
+    var isLoadingMore: Bool { get }
+    func toggleUniversityExpansion(for university: University)
+    func updateCellViewModels()
+}
+
+protocol HomeViewModelDelegate: AnyObject {
+    func universitiesDidUpdate()
+    func searchResultsDidUpdate()
+    func showLoading(_ show: Bool)
+}
+
+final class HomeViewModel: HomeViewModelProtocol {
+    var cellViewModels: [Any] = []
+    weak var delegate: HomeViewModelDelegate?
+    private var allUniversities: [UniversityData] = []
+    private(set) var universities: [UniversityData] = []
+    private var isSearchActive = false
+    
+    private var favorites: Set<String> = [] // University isimleri için
+    private var expandedCities: Set<String> = []
+    private var expandedUniversities: Set<String> = []
+    
+    private let universityService: UniversityService
+    private var currentPage = 1
+    private var isLoading = false
+    private var hasMorePages = true
+    
+    init(universityService: UniversityService = UniversityService()) {
+        self.universityService = universityService
+    }
+    
+    var cities: [String] {
+        // Şehirlerin listesini province'dan alıyoruz
+        return universities.compactMap { $0.province }.sorted()
+    }
+    
+    var isLoadingMore: Bool {
+        return isLoading && hasMorePages && !isSearchActive
+    }
+    
+    func setUniversities(_ universities: [UniversityData]) {
+        self.allUniversities = universities
+        self.universities = universities
+        updateCellViewModels()
+        delegate?.universitiesDidUpdate()
+    }
+    
+    func updateCellViewModels() {
+        var newCellViewModels: [Any] = []
+        
+        for universityData in universities {
+            let isProvinceExpanded = expandedCities.contains(universityData.province ?? "")
+            
+            // İl başlığı ekle
+            newCellViewModels.append(CityTableViewCellModel(
+                type: .province(universityData.province ?? "", isExpanded: isProvinceExpanded, hasUniversities: (universityData.universities?.isEmpty ?? false))
+            ))
+            
+            // İl genişletilmişse üniversiteleri ekle
+            if isProvinceExpanded {
+                for university in universityData.universities ?? [] {
+                    let isUniversityExpanded = expandedUniversities.contains(university.name ?? "")
+                    let isFavorite = favorites.contains(university.name ?? "")
+                    
+                    newCellViewModels.append(CityTableViewCellModel(
+                        type: .university(
+                            university,
+                            isFavorite: isFavorite,
+                            isExpanded: isUniversityExpanded
+                        )
+                    ))
+                }
+            }
+        }
+        
+        if hasMorePages && !isSearchActive {
+            newCellViewModels.append(LoadingCellViewModel())
+        }
+        
+        cellViewModels = newCellViewModels
+        delegate?.universitiesDidUpdate()
+    }
+    
+    func searchUniversities(with text: String) {
+        
+        let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        guard !searchText.isEmpty else {
+            isSearchActive = false
+            universities = allUniversities
+            expandedCities.removeAll()
+            expandedUniversities.removeAll()
+            delegate?.universitiesDidUpdate()
+            return
+        }
+        
+        isSearchActive = true
+        universities = allUniversities.compactMap { universityData in
+            guard let universities = universityData.universities?.filter({ university in
+                let name = university.name?.lowercased() ?? ""
+                let contains = name.contains(searchText)
+                return contains
+            }), !universities.isEmpty else {
+                return nil
+            }
+            
+            return UniversityData(
+                id: universityData.id,
+                province: universityData.province,
+                universities: universities
+            )
+        }
+        
+        // Arama sonuçlarının olduğu tüm bölümleri otomatik olarak aç
+        expandedCities = Set(universities.compactMap { $0.province })
+        expandedUniversities = Set(universities.compactMap { $0.universities?.map { $0.name ?? "" } ?? [] }.joined())
+        delegate?.universitiesDidUpdate()
+    }
+    
+    func toggleFavorite(for university: University) {
+        if favorites.contains(university.name ?? "") {
+            favorites.remove(university.name ?? "")
+        } else {
+            favorites.insert(university.name ?? "")
+        }
+    }
+    
+    func isUniversityFavorited(_ university: University) -> Bool {
+        return favorites.contains(university.name ?? "")
+    }
+    
+    func universities(for city: String) -> [University] {
+        // Belirli bir şehirdeki üniversiteleri filtreliyoruz
+        return universities
+            .first(where: { $0.province == city })?
+            .universities ?? []
+    }
+    
+    func isExpanded(_ city: String) -> Bool {
+        return expandedCities.contains(city)
+    }
+    
+    func toggleExpansion(for city: String) {
+        if expandedCities.contains(city) {
+            expandedCities.remove(city)
+        } else {
+            expandedCities.insert(city)
+        }
+        // Expansion değiştiğinde cell view model'leri güncellememiz gerekiyor
+        updateCellViewModels()
+    }
+    
+    func toggleUniversityExpansion(for university: University) {
+        if expandedUniversities.contains(university.name ?? "") {
+            expandedUniversities.remove(university.name ?? "")
+        } else {
+            expandedUniversities.insert(university.name ?? "")
+        }
+        updateCellViewModels()
+    }
+    
+    func loadNextPage() {
+        guard !isLoading && hasMorePages && !isSearchActive else { return }
+        
+        isLoading = true
+        delegate?.showLoading(true)
+        
+        universityService.posts(with: currentPage + 1) { [weak self] result in
+            guard let self = self else { return }
+            
+            self.isLoading = false
+            self.delegate?.showLoading(false)
+            
+            switch result {
+            case .success(let response):
+                self.currentPage += 1
+                self.hasMorePages = (response.currentPage ?? 0) < (response.totalPage ?? 0)
+                
+                if let newData = response.data {
+                    self.allUniversities.append(contentsOf: newData)
+                    self.universities = self.allUniversities
+                    self.updateCellViewModels()
+                    self.delegate?.universitiesDidUpdate()
+                }
+                
+            case .failure(let error):
+                print("Error loading next page: \(error)")
+            }
+        }
+    }
+}
